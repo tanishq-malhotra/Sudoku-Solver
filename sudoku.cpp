@@ -45,10 +45,13 @@ void sudoku::Print()
 void sudoku::Main()
 {
 	//if sudoku is solved then print it
-	if (solveSudoku(0, 0))
-		Print();
-	else
-		cout << "no possible combinations"<<endl;
+	if(safeGrid())
+	{
+	solveSudoku(0, 0);
+	Print();
+	}
+	else cout<<"wrong input"<<endl;
+	
 	
 }
 //solve function, row and col initially set to 0
@@ -138,4 +141,30 @@ bool sudoku::subGridSafe(int r, int c,int num)
 			if(grid[i][j] == num)
 				return false;
 return true;	
+}
+
+bool sudoku::safeGrid()
+{
+	int temp,f=0,i,j;
+	for(i = 0; i < 9; i++)
+	{
+		for(j = 0; j < 9; j++)
+		{
+			if(grid[i][j]!=0)
+			{
+			temp = grid[i][j];
+			grid[i][j] = 0;
+			if(isSafe(i,j,temp))
+			{
+				grid[i][j] = temp;
+			}
+			else
+			{
+				grid[i][j] = temp;
+				return false;
+			}
+			}
+		}
+	}
+	return true;
 }

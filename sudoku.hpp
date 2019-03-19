@@ -27,5 +27,5 @@ public:
 	bool colSafe(int ,int );
 	//function for checking safe subgrid
 	bool subGridSafe(int , int ,int );
-	
+	bool safeGrid();
 };
